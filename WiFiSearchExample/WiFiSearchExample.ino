@@ -3,7 +3,7 @@
 
 // debug print control
 const bool wifiDebug=1; // set to 1 to enable printing, 0 to disable   
-#include "WiFiSearch.h" // tab file, to become library
+#include "WiFiSearch.h" // library
 
 // ---------------------setup()-----------------------
 void setup() {

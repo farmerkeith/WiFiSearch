@@ -1,6 +1,8 @@
 // file WiFiSearch.h created 5 Dec 2017 by farmerkeith
 // looks for a WiFi signal that it recognises and returns an object of type WiFiData
 // The object flag is 0 if no signal or no recognised network
+#ifndef FARMERKEITH_WIFISEARCH
+#define FARMERKEITH_WIFISEARCH
 
 #include "WiFiData.h" // private library for WiFi access data
 #include <ESP8266WiFi.h> // library for WiFi protocol stack
@@ -72,6 +74,6 @@ String WiFiSearch::encryptionType (int typeCode){
     } // end of switch (typeCode)
 } // end of String WiFiSearch::encryptionType (int typeCode)
 
-
+#endif
 // end of file
 
