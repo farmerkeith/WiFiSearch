@@ -13,15 +13,17 @@ void setup() {
   WiFiSearch.debug = wifiDebug; // set debug printing in WiFiSearch library
   WiFiData WiFiUsed = WiFiSearch.Search(); // returns WiFiData object of registered network if found
   
-  Serial.println ("Results of WiFiSearch:");
+  // Serial.println ("Results of WiFiSearch:");
   if (WiFiUsed.flag==0) Serial.println (" No recognised network");
   else {
-    Serial.print ("Network recognised, SSID = ");
+    Serial.print ("WiFi Network, SSID = ");
     Serial.print (WiFiUsed.ssid);
     Serial.print (" Password= ");
-    Serial.println (WiFiUsed.password);
+    Serial.print (WiFiUsed.password);
+    Serial.print (" Strength= ");
+    Serial.println (WiFiSearch.RSSI());
   }
-
+  ESP.deepSleep(20000000); // 10 seconds sleep then restart
 } // end of void setup() 
 
 // -------------------- loop------------------------
