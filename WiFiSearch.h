@@ -1,4 +1,4 @@
-// file WiFiSearch.h created 5 Dec 2017 by farmerkeith
+// file WiFiSearch.h created 5 Dec 2017 by farmerkeith, updated 7 May 2019
 // looks for a WiFi signal that it recognises and returns an object of type WiFiData
 // The object flag is 0 if no signal or no recognised network
 
@@ -16,9 +16,12 @@ class WiFiSearch {
   private:
     String encryptionType (int typeCode); // function to decode encryption code of a WiFi signal
     byte WiFiSelected;                    // network No. of selected network
+    int RSSI1;                            // RSSI of current network
+    byte WiFiSelected1;                   // network No. of current network
 } WiFiSearch; // instantiates WiFiSearch
 
 WiFiData WiFiSearch::Search() {
+  int RSSIbest = -1000;
   int networkCount = WiFi.scanNetworks();
   if (debug) {
     Serial.print (" WiFiSearch: Seeing ");
@@ -29,7 +32,8 @@ WiFiData WiFiSearch::Search() {
   }
   WiFiData WiFiTemp; // local object of type WiFiData, initialised empty, flag=0
   // check if any network is recognised, and if so set up for log in
-  for (int i = 0; i < networkCount; i++) {
+  // for (int i = 0; i < 4; i++) { // arbitrary networkCount
+  for (int i = 0; i < networkCount; i++) { // for each WiFi signal
     String ssidTemp = WiFi.SSID(i);
     if (debug) {
       // Print SSID, RSSI and Encryption for each network found
@@ -43,10 +47,15 @@ WiFiData WiFiSearch::Search() {
       // Encryption type codes: 2 = TKIP(WPA), 5=WEP, 4=CCMP(WPA), 7=NONE, 8=AUTO
     } // end of if (debug)
 
+    // logic: if RSSI best is the initial value, check if the SSID is in the list and if so remember it and its RSSI,
+    // Serial.print("line53 RSSIbest="); Serial.println(RSSIbest);
     for (int j = 0; j < WiFiData::count; j++) { // check against recognised networks
       if (ssidTemp == (String)network[j].ssid) {
-        WiFiTemp = network[j];
-        WiFiSelected = i;
+        if (WiFi.RSSI(i) > RSSIbest) {
+          WiFiTemp = network[j];
+          WiFiSelected = i;
+          RSSIbest = WiFi.RSSI(i);
+        }
       }
     }
 

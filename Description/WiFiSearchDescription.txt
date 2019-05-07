@@ -5,6 +5,7 @@ WiFiData.h contains a class (WiFiData) and a set of example data that shows how 
 WiFiSearch and WiFiData have been separated to make it easy to cusomise WiFiData for the local environment of the user, without needing to change the WiFiSearch class.
 The WiFiData.h file defines a class which contains the SSID (Service Set IDentifier), password and a flag for one or more WiFi networks that may be used by the hardware. The user will need to enter the SSID and password (or several if more than one) in the file using a text editor following the model provided in the existing file.
 The Search function looks for WiFi networks visible to the hardware, compares the SSID(s) with those in the WiFiData file, and if it finds a match returns the SSID, password pair to the calling function, along with the flag variable set to 1. 
+if several matching SSIDs are found, the one with the highest RSSI is returned.
 If no matching SSID is found, the returned object has null SSID and password and a flag set to 0. 
 The flag makes it easy for the calling software to decide whether to proceed with registering with the network, or to take appropriate action if there is no network recognised.
 All comments and suggestions for improvements will be noted and where possible acted upon.
