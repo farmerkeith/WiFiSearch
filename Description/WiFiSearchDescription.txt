@@ -2,7 +2,7 @@ This software has been developed for the WeMos D1 mini pro development board. It
 WiFiSearch comes in the form of 2 header files: WiFiSearch.h and WiFiData.h and an example WiFiSearchExample.ino.
 WiFiSeach.h contains a single class (WiFiSearch) with a main function (Search), a boolean variable (debug) and a secondary function (encryptionType). The debug variable can be used to control printing to the serial monitor of the progress of the search process. 
 WiFiData.h contains a class (WiFiData) and a set of example data that shows how to populate it with data applicable to the user.
-WiFiSearch and WiFiData have been separated to make it easy to cusomise WiFiData for the local environment of the user, without needing to change the WiFiSearch class.
+WiFiSearch and WiFiData have been separated to make it easy to customise WiFiData for the local environment of the user, without needing to change the WiFiSearch class.
 The WiFiData.h file defines a class which contains the SSID (Service Set IDentifier), password and a flag for one or more WiFi networks that may be used by the hardware. The user will need to enter the SSID and password (or several if more than one) in the file using a text editor following the model provided in the existing file.
 The Search function looks for WiFi networks visible to the hardware, compares the SSID(s) with those in the WiFiData file, and if it finds a match returns the SSID, password pair to the calling function, along with the flag variable set to 1. 
 if several matching SSIDs are found, the one with the highest RSSI is returned.
